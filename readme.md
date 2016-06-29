@@ -1,3 +1,3 @@
-# Laravel Issue Tracker
+# Laravel Support Ticket
 
-An issue tracking application built using the Laravel framework.
+An support ticket application built using the Laravel framework.
