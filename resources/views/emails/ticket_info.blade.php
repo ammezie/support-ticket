@@ -13,5 +13,9 @@
 	<p>Priority: {{ $ticket->priority }}</p>
 	<p>Status: {{ $ticket->status }}</p>
 
+	<p>
+		You can view the ticket at any time at {{ url('tickets/'. $ticket->ticket_id) }}
+	</p>
+
 </body>
 </html>
