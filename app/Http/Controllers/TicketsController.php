@@ -51,7 +51,6 @@ class TicketsController extends Controller
      */
     public function store(Request $request, AppMailer $mailer)
     {
-        // validate the request
         $this->validate($request, [
             'title'     => 'required',
             'category'  => 'required',
@@ -59,11 +58,10 @@ class TicketsController extends Controller
             'message'   => 'required'
         ]);
 
-        // create ticket
         $ticket = new Ticket([
             'title'     => $request->input('title'),
             'user_id'   => Auth::user()->id,
-            'ticket_id' => str_random(10),
+            'ticket_id' => strtoupper(str_random(10)),
             'category_id'  => $request->input('category'),
             'priority'  => $request->input('priority'),
             'message'   => $request->input('message'),
@@ -72,13 +70,8 @@ class TicketsController extends Controller
 
         $ticket->save();
 
-        // send mail containing ticket information
         $mailer->sendTicketInformation(Auth::user(), $ticket);
 
-        // flash message
-        // session()->flash("A ticket with #" .$ticket->ticket_id . " has been open for you.");
-
-        // redirect back
         return redirect()->back()->with("status", "A ticket with ID: #$ticket->ticket_id has been opened for you.");
     }
 
