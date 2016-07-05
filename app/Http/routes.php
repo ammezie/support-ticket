@@ -19,4 +19,6 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
-Route::resource('tickets', 'TicketsController', ['except' => 'destroy']);
+Route::resource('tickets', 'TicketsController', ['except' => ['show', 'destroy']]);
+Route::get('tickets/{ticket_id}', 'TicketsController@show');
+Route::post('comment', 'CommentsController@postComment');

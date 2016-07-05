@@ -20,6 +20,14 @@ class Ticket extends Model
      */
 	public function user()
     {
-    	return $this->belongsTo(App::User);
+    	return $this->belongsTo(User::class);
+   }
+
+    /**
+     * A ticket can have many comments
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

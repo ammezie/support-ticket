@@ -72,7 +72,7 @@ class TicketsController extends Controller
 
         $mailer->sendTicketInformation(Auth::user(), $ticket);
 
-        return redirect()->back()->with("status", "A ticket with ID: #$ticket->ticket_id has been opened for you.");
+        return redirect()->back()->with("status", "A ticket with ID: #$ticket->ticket_id has been opened.");
     }
 
     /**
@@ -81,9 +81,14 @@ class TicketsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($ticket_id)
     {
-        //
+        $ticket = Ticket::where('ticket_id', $ticket_id)->firstOrFail();
+        $category = Category::where('id', $ticket->category_id)->firstOrFail();
+
+        // dd($ticket);
+
+        return view('tickets.show', compact('ticket', 'category'));
     }
 
     /**

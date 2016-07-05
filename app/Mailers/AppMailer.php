@@ -67,6 +67,25 @@ class AppMailer {
 	}
 
 	/**
+	 * Send Ticket Comments/Replies to Ticket Owner
+	 *
+	 * @param  User   $ticketOwner
+	 * @param  User   $user
+	 * @param  Ticket  $ticket
+	 * @param  Comment  $comment
+	 * @return method deliver()
+	 */
+	public function sendTicketComments($ticketOwner, $user, Ticket $ticket, $comment)
+	{
+		$this->to = $ticketOwner->email;
+		$this->subject = "RE: $ticket->title (Ticket ID: $ticket->ticket_id)";
+		$this->view = 'emails.ticket_comments';
+		$this->data = compact('ticketOwner', 'user', 'ticket', 'comment');
+
+		return $this->deliver();
+	}
+
+	/**
 	 * Send welcome email to user
 	 * 
 	 * @param  User   $user
