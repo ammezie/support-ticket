@@ -26,9 +26,10 @@ class TicketsController extends Controller
      */
     public function index()
     {
-    	$tickets = Ticket::all();
+    	$tickets = Ticket::findOrFail(Auth::user()->id)->paginate(10);
+        $categories = Category::all();
 
-        return view('tickets');
+        return view('tickets.tickets', compact('tickets', 'categories'));
     }
 
     /**
@@ -85,8 +86,6 @@ class TicketsController extends Controller
     {
         $ticket = Ticket::where('ticket_id', $ticket_id)->firstOrFail();
         $category = Category::where('id', $ticket->category_id)->firstOrFail();
-
-        // dd($ticket);
 
         return view('tickets.show', compact('ticket', 'category'));
     }

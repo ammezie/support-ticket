@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', My Tickets)
+@section('title', 'My Tickets')
 
 @section('content')
 	<div class="row">
@@ -17,14 +17,34 @@
 	        				</tr>
 	        			</thead>
 	        			<tbody>
-	        				<tr>
-	        					<td>$ticket->category</td>
-	        					<td>{{ $ticket->title }}</td>
-	        					<td>{{ $ticket->status }}</td>
+	        			@foreach ($tickets as $ticket)
+							<tr>
+	        					<td>
+	        					@foreach ($categories as $category)
+	        						@if ($category->id === $ticket->category_id)
+										{{ $category->name }}
+	        						@endif
+	        					@endforeach
+	        					</td>
+	        					<td>
+	        						<a href="{{ url('tickets/'. $ticket->ticket_id) }}">
+	        							#{{ $ticket->ticket_id }} - {{ $ticket->title }}
+	        						</a>
+	        					</td>
+	        					<td>
+	        					@if ($ticket->status === 'open')
+	        						<span class="label label-success">{{ $ticket->status }}</span>
+	        					@else
+	        						<span class="label label-danger">{{ $ticket->status }}</span>
+	        					@endif
+	        					</td>
 	        					<td>{{ $ticket->updated_at }}</td>
 	        				</tr>
+	        			@endforeach
 	        			</tbody>
 	        		</table>
+
+	        		{{ $tickets->render() }}
 	        	</div>
 	        </div>
 	    </div>

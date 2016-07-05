@@ -7,7 +7,7 @@
 		<div class="col-md-10 col-md-offset-1">
 	        <div class="panel panel-default">
 	        	<div class="panel panel-heading">
-	        		Ticket ID: {{ $ticket->ticket_id }} - {{ $ticket->title }}
+	        		#{{ $ticket->ticket_id }} - {{ $ticket->title }}
 	        	</div>
 
 	        	<div class="panel-body">
@@ -17,7 +17,11 @@
 	        			<p>{{ $ticket->message }}</p>
 		        		<p>Categry: {{ $category->name }}</p>
 		        		<p>
-		        			Status: <span class="label label-success">{{ $ticket->status }}</span>
+	        			@if ($ticket->status === 'open')
+    						Status: <span class="label label-success">{{ $ticket->status }}</span>
+    					@else
+    						Status: <span class="label label-danger">{{ $ticket->status }}</span>
+    					@endif
 		        		</p>
 		        		<p>Created on: {{ $ticket->created_at->diffForHumans() }}</p>
 	        		</div>
