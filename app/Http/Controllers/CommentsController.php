@@ -30,12 +30,9 @@ class CommentsController extends Controller
         	'comment'	=> $request->input('comment'),
         ]);
 
-        $ticket = Ticket::where('id', $comment->ticket_id)->firstOrFail();
-
-        $ticketOwner = User::getTicketOwner($ticket->user_id);
-
-        if ($ticketOwner->id !== Auth::user()->id) {
-        	$mailer->sendTicketComments($ticketOwner, Auth::user(), $ticket, $comment);
+        // send mail if the user commenting is not the ticket owner
+        if ($comment->ticket->user->id !== Auth::user()->id) {
+        	$mailer->sendTicketComments($comment->ticket->user, Auth::user(), $comment->ticket, $comment);
         }
         
         return redirect()->back()->with("status", "Your comment has be submitted.");

@@ -6,9 +6,6 @@
 </head>
 <body>
 	<p>
-		Hello {{ ucfirst($ticketOwner->name) }},
-	</p>
-	<p>
 		{{ $comment->comment }}
 	</p>
 
