@@ -19,7 +19,17 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
-Route::resource('tickets', 'TicketsController', ['except' => ['show', 'destroy']]);
+Route::get('new_ticket', 'TicketsController@create');
+Route::post('new_ticket', 'TicketsController@store');
 Route::get('tickets/{ticket_id}', 'TicketsController@show');
+Route::get('my_tickets', 'TicketsController@userTickets');
+
+
+Route::group(['prefix' => 'admin'], function() {
+	Route::get('tickets', 'TicketsController@index');
+	Route::get('close_ticket/{id}', 'TicketsController@close');
+});
+
+// Route::resource('tickets', 'TicketsController', ['except' => ['show', 'destroy']]);
 
 Route::post('comment', 'CommentsController@postComment');

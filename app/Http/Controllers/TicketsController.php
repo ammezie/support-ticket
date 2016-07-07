@@ -27,10 +27,23 @@ class TicketsController extends Controller
      */
     public function index()
     {
-    	$tickets = Ticket::find(Auth::user()->id)->paginate(10);
+    	$tickets = Ticket::paginate(10);
         $categories = Category::all();
 
-        return view('tickets.tickets', compact('tickets', 'categories'));
+        return view('tickets.index', compact('tickets', 'categories'));
+    }
+
+    /**
+     * Display all tickets by a user.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function userTickets()
+    {
+        $tickets = Ticket::find(Auth::user()->id)->paginate(10);
+        $categories = Category::all();
+
+        return view('tickets.user_tickets', compact('tickets', 'categories'));
     }
 
     /**
@@ -118,13 +131,13 @@ class TicketsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Close the specified ticket.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function destroy($id)
-    // {
-    //     //
-    // }
+    public function close($id)
+    {
+        return "Hi!";
+    }
 }
