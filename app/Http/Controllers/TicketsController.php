@@ -80,7 +80,7 @@ class TicketsController extends Controller
             'category_id'  => $request->input('category'),
             'priority'  => $request->input('priority'),
             'message'   => $request->input('message'),
-            'status'   => "open",
+            'status'    => "Open",
         ]);
 
         $ticket->save();
@@ -136,8 +136,18 @@ class TicketsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function close($id)
+    public function close($ticket_id, AppMailer $mailer)
     {
-        return "Hi!";
+        $ticket = Ticket::where('ticket_id', $ticket_id)->firstOrFail();
+
+        $ticket->status = 'Closed';
+
+        $ticket->save();
+
+        $ticketOwner = $ticket->user;
+
+        $mailer->sendTicketStatusNotification($ticketOwner, $ticket);
+
+        return redirect()->back()->with("status", "The ticket has been closed.");
     }
 }

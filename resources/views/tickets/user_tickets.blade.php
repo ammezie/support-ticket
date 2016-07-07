@@ -32,7 +32,7 @@
 	        						</a>
 	        					</td>
 	        					<td>
-	        					@if ($ticket->status === 'open')
+	        					@if ($ticket->status === 'Open')
 	        						<span class="label label-success">{{ $ticket->status }}</span>
 	        					@else
 	        						<span class="label label-danger">{{ $ticket->status }}</span>

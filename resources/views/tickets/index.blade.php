@@ -33,7 +33,7 @@
 	        						</a>
 	        					</td>
 	        					<td>
-	        					@if ($ticket->status === 'open')
+	        					@if ($ticket->status === 'Open')
 	        						<span class="label label-success">{{ $ticket->status }}</span>
 	        					@else
 	        						<span class="label label-danger">{{ $ticket->status }}</span>
@@ -44,7 +44,10 @@
 	        						<a href="{{ url('tickets/' . $ticket->ticket_id) }}" class="btn btn-primary">Comment</a>
 	        					</td>
 	        					<td>
-	        						<a href="{{ url('admin/close_ticket/' . $ticket->id) }}" class="btn btn-danger">Close</a>
+	        						<form action="{{ url('admin/close_ticket/' . $ticket->ticket_id) }}" method="POST">
+	        							{!! csrf_field() !!}
+	        							<button type="submit" class="btn btn-danger">Close</button>
+	        						</form>
 	        					</td>
 	        				</tr>
 	        			@endforeach

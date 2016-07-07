@@ -86,19 +86,20 @@ class AppMailer {
 	}
 
 	/**
-	 * Send welcome email to user
+	 * Send ticket status notification
 	 * 
 	 * @param  User   $user
 	 * @return method deliver()
 	 */
-	// public function sendWelcomeMailTo(User $user)
-	// {
-	// 	$this->to = $user->email;
-	// 	$this->view = 'emails.welcome';
-	// 	$this->data = compact('user');
+	public function sendTicketStatusNotification($ticketOwner, Ticket $ticket)
+	{
+		$this->to = $ticketOwner->email;
+		$this->subject = "RE: $ticket->title (Ticket ID: $ticket->ticket_id)";
+		$this->view = 'emails.ticket_status';
+		$this->data = compact('ticketOwner', 'ticket');
 
-	// 	return $this->deliver();
-	// }
+		return $this->deliver();
+	}
 
 	/**
 	 * Do the actual sending of the mail

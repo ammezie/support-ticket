@@ -27,7 +27,7 @@ Route::get('my_tickets', 'TicketsController@userTickets');
 
 Route::group(['prefix' => 'admin'], function() {
 	Route::get('tickets', 'TicketsController@index');
-	Route::get('close_ticket/{id}', 'TicketsController@close');
+	Route::post('close_ticket/{ticket_id}', 'TicketsController@close');
 });
 
 // Route::resource('tickets', 'TicketsController', ['except' => ['show', 'destroy']]);
