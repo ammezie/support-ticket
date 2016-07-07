@@ -33,6 +33,14 @@ class User extends Authenticatable
     }
 
     /**
+     * A user can have many comments
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    /**
      * Get the user that created ticket
      * @param  User  $user_id
      */

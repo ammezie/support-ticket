@@ -22,4 +22,12 @@ class Comment extends Model
     {
     	return $this->belongsTo(Ticket::class);
     }
+
+    /**
+     * A comment belongs to a user
+     */
+    public function user()
+    {
+    	return $this->belongsTo(User::class);
+    }
 }

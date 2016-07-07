@@ -30,4 +30,12 @@ class Ticket extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    /**
+     * A ticket belongs to a category
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

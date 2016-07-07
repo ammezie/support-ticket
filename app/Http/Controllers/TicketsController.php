@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Ticket;
 use App\Category;
 use App\Http\Requests;
@@ -26,7 +27,7 @@ class TicketsController extends Controller
      */
     public function index()
     {
-    	$tickets = Ticket::findOrFail(Auth::user()->id)->paginate(10);
+    	$tickets = Ticket::find(Auth::user()->id)->paginate(10);
         $categories = Category::all();
 
         return view('tickets.tickets', compact('tickets', 'categories'));
@@ -79,15 +80,18 @@ class TicketsController extends Controller
     /**
      * Display a specified ticket.
      *
-     * @param  int  $id
+     * @param  int  $ticket_id
      * @return \Illuminate\Http\Response
      */
     public function show($ticket_id)
     {
         $ticket = Ticket::where('ticket_id', $ticket_id)->firstOrFail();
-        $category = Category::where('id', $ticket->category_id)->firstOrFail();
 
-        return view('tickets.show', compact('ticket', 'category'));
+        $comments = $ticket->comments;
+
+        $category = $ticket->category;
+
+        return view('tickets.show', compact('ticket', 'category', 'comments'));
     }
 
     /**

@@ -12,4 +12,13 @@ class Category extends Model
 	 * @var array
 	 */
     protected $fillable = ['name'];
+
+
+    /**
+     * A category can have many tickets
+     */
+    public function tickets()
+    {
+    	return $this->hasMany(Ticket::class);
+    }
 }
