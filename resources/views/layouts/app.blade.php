@@ -52,6 +52,7 @@
                         <li><a href="{{ url('admin/tickets') }}">Tickets</a></li>
                     @else
                         <li><a href="{{ url('my_tickets') }}">My Tickets</a></li>
+                        <li><a href="{{ url('new_ticket') }}">Open Ticket</a></li>
                     @endif
                 </ul>
 
