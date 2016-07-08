@@ -1,3 +1,3 @@
-# Laravel Support Ticket
+# Support Ticket
 
 An support ticket application built using the Laravel framework.
