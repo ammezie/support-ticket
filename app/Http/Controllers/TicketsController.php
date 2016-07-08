@@ -37,7 +37,7 @@ class TicketsController extends Controller
      */
     public function userTickets()
     {
-        $tickets = Ticket::find(Auth::user()->id)->paginate(10);
+        $tickets = Ticket::where('user_id', Auth::user()->id)->paginate(10);
         $categories = Category::all();
 
         return view('tickets.user_tickets', compact('tickets', 'categories'));
