@@ -40,14 +40,19 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravel
+                    SupportTicket
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
+                    <li><a href="{{ url('/') }}">Home</a></li>
+                    @if (Auth::user()->is_admin)
+                        <li><a href="{{ url('admin/tickets') }}">Tickets</a></li>
+                    @else
+                        <li><a href="{{ url('my_tickets') }}">My Tickets</a></li>
+                    @endif
                 </ul>
 
                 <!-- Right Side Of Navbar -->
