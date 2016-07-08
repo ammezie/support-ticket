@@ -88,7 +88,8 @@ class AppMailer {
 	/**
 	 * Send ticket status notification
 	 * 
-	 * @param  User   $user
+	 * @param  User   $ticketOwner
+	 * @param  Ticket  $ticket
 	 * @return method deliver()
 	 */
 	public function sendTicketStatusNotification($ticketOwner, Ticket $ticket)
