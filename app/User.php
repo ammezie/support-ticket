@@ -48,4 +48,13 @@ class User extends Authenticatable
     {
         return static::where('id', $user_id)->firstOrFail();
     }
+
+    public function isAdmin()
+    {
+        if (Auth::user()->is_admin === 1) {
+            return true;
+        }
+
+        return false;
+    }
 }

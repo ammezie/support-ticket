@@ -11,13 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/', 'HomeController@index');
 
 Route::get('new_ticket', 'TicketsController@create');
 Route::post('new_ticket', 'TicketsController@store');
@@ -29,7 +25,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
 	Route::get('tickets', 'TicketsController@index');
 	Route::post('close_ticket/{ticket_id}', 'TicketsController@close');
 });
-
-// Route::resource('tickets', 'TicketsController', ['except' => ['show', 'destroy']]);
 
 Route::post('comment', 'CommentsController@postComment');
